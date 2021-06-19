@@ -1,0 +1,6 @@
+- name: 'Provisiong mirth.properties'
+  ansible.builtin.template:
+    src: templates/mirth.properties.j2
+    dest: '{{ so.base_installation_directory }}{{ so.installation_directory }}/conf/mirth.properties'
+    owner: '{{ so.user }}'
+    group: '{{ so.group}}'

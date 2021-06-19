@@ -1,0 +1,15 @@
+- name: 'SO user stuff'
+  include: 'so-users.yml'
+
+- name: 'Download and install Mirth Software'
+  include: 'install-mirth.yml'
+
+- name: 'Install OpenJDK'
+  include: 'openjdk.yml'
+
+- name: 'Enable firewalld and open ports'
+  include: 'firewall.yml'
+  when: firewall == 'True'
+
+- name: 'Configure mirth'
+  include: 'configure-mirth.yml'

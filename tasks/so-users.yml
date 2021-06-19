@@ -1,0 +1,10 @@
+- name: 'Ensure group {{ so.group }} is created'
+  ansible.builtin.group:
+    name: '{{ so.group }}'
+    state: present
+
+- name: 'Ensure user {{ so.user }} is created'
+  ansible.builtin.user:
+    name: '{{ so.user }}'
+    group: '{{ so.group }}'
+    state: present
