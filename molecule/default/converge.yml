@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include mirth-role"
+      include_role:
+        name: "mirth-role"

@@ -1,0 +1,32 @@
+- name: 'Download Mirth tar.gz'
+  get_url:
+    url: '{{ mirth_installation.download_url }}{{ mirth_installation.tgz_file }}'
+    dest: '/tmp'
+
+#- name: 'Copy file instead of downloading it'
+#  ansible.builtin.copy:
+#    src: 'files/{{mirth_installation.tgz_file}}'
+#    dest: /tmp
+#    owner: '{{ so.user }}'
+#    group: '{{ so.group}}'
+
+- name: 'uncompress tar.gz'
+  ansible.builtin.unarchive:
+    remote_src: 'yes'
+    src: '/tmp/{{ mirth_installation.tgz_file }}'
+    dest: '{{ so.base_installation_directory }}'
+    owner: '{{ so.user }}'
+    group: '{{ so.group }}'
+
+- name: 'empty target folder, {{ so.base_installation_directory }}{{ so.installation_directory }}'
+  ansible.builtin.file:
+    path: '{{ so.base_installation_directory }}{{ so.installation_directory }}'
+    state: absent
+
+- name: 'rename target folder to {{ so.base_installation_directory }}{{ so.installation_directory }}'
+  command: 'mv {{ so.base_installation_directory }}{{mirth_installation.default_directory}} {{ so.base_installation_directory }}{{ so.installation_directory }}'
+
+- name: 'delete downloaded tar.gz'
+  ansible.builtin.file:
+    path: '/tmp/{{mirth_installation.tgz_file}}'
+    state: absent

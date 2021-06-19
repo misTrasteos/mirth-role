@@ -1,0 +1,20 @@
+---
+- name: 'Install firewalld'
+  yum:
+    name: 'firewalld'
+    state: 'present'
+
+- name: 'Start service firewalld, if not started'
+  ansible.builtin.service:
+    name: 'firewalld'
+    state: 'started'
+
+- name: 'Open ports'
+  ansible.posix.firewalld:
+    port: '{{port}}/tcp'
+    permanent: yes
+    state: enabled
+    immediate: yes
+  loop: '{{mirth_configuration.ports}}'
+  loop_control:
+    loop_var: port

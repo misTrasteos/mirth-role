@@ -1,0 +1,40 @@
+---
+# defaults file for mirth-role
+so:
+  user: 'mirth'
+  group: 'mirth'
+  base_installation_directory: '/opt/'
+  installation_directory: 'mirth'
+
+firewall: False
+
+mirth_installation:
+  download_url: 'http://downloads.mirthcorp.com/connect/3.11.0.b2609/'
+  tgz_file: 'mirthconnect-3.11.0.b2609-unix.tar.gz'
+  default_directory: 'Mirth\ Connect'
+
+java_version: 'java-1.8.0-openjdk-devel'
+
+mirth_configuration:
+  dashboard:
+    http_port: 8080
+    https_port: 8443
+  
+  ports:
+  - 6661
+  - 6662
+  
+  db:
+    engine: 'derby'
+    name: ''
+    user: ''
+    password: ''
+    url: 'jdbc:derby:${dir.appdata}/mirthdb;create=true'
+
+# myqsl example
+#  db:
+#    engine: 'mysql'
+#    name: 'mirth'
+#    user: mirth'
+#    password: '123456'
+#    url: 'jdbc:mysql://localhost:3306/mirthdb'
